@@ -27,6 +27,7 @@ class DBHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             image TEXT,
             title TEXT,
+            price REAL,
             category TEXT
           )
           ''');

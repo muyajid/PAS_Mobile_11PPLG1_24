@@ -43,7 +43,7 @@ class ProductModel {
     return ProductModel(
       id: json["id"] ?? 0,
       title: json["title"] ?? "",
-      price: 0,
+      price: (json['price'] as num).toDouble(),
       description: "",
       category: categoryValues.map[json["category"]] ?? Category.ELECTRONICS,
       image: json["image"] ?? "",
