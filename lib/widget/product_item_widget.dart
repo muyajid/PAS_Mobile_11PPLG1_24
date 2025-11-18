@@ -40,7 +40,7 @@ class ProductItemWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   image,
-                  height: 200,
+                  height: 250,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

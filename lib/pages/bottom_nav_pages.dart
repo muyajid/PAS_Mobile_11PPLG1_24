@@ -20,7 +20,7 @@ class BottomNavPages extends StatelessWidget {
             ),
           ),
           backgroundColor: AppColor.primaryblue,
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
           elevation: 2,
           centerTitle: false,
         ),
