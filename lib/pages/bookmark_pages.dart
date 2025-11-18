@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pas_mobile_11pplg1_24/controller/product_controller.dart';
 import 'package:pas_mobile_11pplg1_24/theme/app_color.dart';
+import 'package:pas_mobile_11pplg1_24/widget/product_item_widget.dart';
 
 class BookmarkPages extends StatelessWidget {
   BookmarkPages({super.key});
@@ -37,36 +38,17 @@ class BookmarkPages extends StatelessWidget {
               itemBuilder: (context, index) {
                 final product = controller.productMark[index];
 
-                return Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.neutrallight,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColor.primaryblue),
-                  ),
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: ListTile(
-                    leading: Image.network(
-                      product.image,
-                      height: 50,
-                      width: 50,
-                      fit: BoxFit.cover,
-                    ),
-                    title: Text(product.title),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(product.price.toString()),
-                        const SizedBox(height: 10),
-                        Text(product.category.toString()),
-                      ],
-                    ),
-                    trailing: IconButton(
-                      onPressed: () {
-                        controller.deleteMarkProduct(index);
-                      },
-                      icon: const Icon(Icons.delete),
-                    ),
-                  ),
+                return ProductItemWidget(
+                  image: product.image,
+                  title: product.title,
+                  price: product.price.toString(),
+                  category: product.category.toString(),
+                  text: "Hapus",
+                  buttonCollor: AppColor.secondaryred,
+                  prefixIcon: Icon(Icons.delete, color: AppColor.neutrallight),
+                  onFavoriteTap: () {
+                    controller.deleteMarkProduct(index);
+                  },
                 );
               },
             ),

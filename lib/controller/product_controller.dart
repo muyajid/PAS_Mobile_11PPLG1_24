@@ -63,6 +63,7 @@ class ProductController extends GetxController {
     await db.markProduct({
       'image': findProduct.image,
       'title': findProduct.title.toString(),
+      'price': findProduct.price,
       'category': findProduct.category.toString(),
     });
 
