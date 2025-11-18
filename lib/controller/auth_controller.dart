@@ -164,5 +164,6 @@ class AuthController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 2),
     );
+    Get.offNamed(AppRouter.loginPages);
   }
 }

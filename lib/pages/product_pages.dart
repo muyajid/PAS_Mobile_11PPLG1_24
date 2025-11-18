@@ -33,14 +33,30 @@ class ProductPages extends StatelessWidget {
                       height: 50,
                       width: 50,
                     ),
-                    title: Text(product.title),
+                    title: Text(
+                      product.title,
+                      style: TextStyle(
+                        color: AppColor.primarydark,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(product.price.toString()),
+                        Text(
+                          "Rp.${product.price.toString()}",
+                          style: TextStyle(fontWeight: FontWeight.w200),
+                        ),
                         SizedBox(height: 10),
-                        Text(product.category.toString()),
+                        Text(
+                          product.category.toString(),
+                          style: TextStyle(
+                            color: AppColor.primarydark,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
                     trailing: IconButton(

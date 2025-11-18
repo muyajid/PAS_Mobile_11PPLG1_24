@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: AppRouter.bottomNav,
+      initialRoute: AppRouter.splashpages,
       getPages: AppPages.pages,
     );
   }

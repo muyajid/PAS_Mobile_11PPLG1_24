@@ -16,6 +16,7 @@ class ProductController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     fetchProduct();
+    fetchMarkProduct();
   }
 
   void fetchProduct() async {
@@ -60,6 +61,7 @@ class ProductController extends GetxController {
     print("Data Product : ${findProduct}");
 
     await db.markProduct({
+      'image': findProduct.image,
       'title': findProduct.title.toString(),
       'category': findProduct.category.toString(),
     });
@@ -72,7 +74,35 @@ class ProductController extends GetxController {
       colorText: AppColor.neutrallight,
       duration: Duration(seconds: 1),
     );
+    fetchMarkProduct();
   }
 
   var productMark = <ProductModel>[].obs;
+
+  void fetchMarkProduct() async {
+    final mapList = await db.getMarkProduct();
+
+    final list = mapList.map((row) => ProductModel.fromDb(row)).toList();
+
+    productMark.assignAll(list);
+
+    print("Data Marked: $productMark");
+  }
+
+  void deleteMarkProduct(int i) async {
+    final product = productMark[i];
+
+    await db.deleteProduct(product.id);
+
+    Get.snackbar(
+      'Product Pages',
+      'Product Berhasil Di Hapus',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: AppColor.secondarygreen,
+      colorText: AppColor.neutrallight,
+      duration: Duration(seconds: 1),
+    );
+
+    fetchMarkProduct();
+  }
 }

@@ -11,52 +11,65 @@ class BookmarkPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Obx(() {
           if (controller.isLoading.value) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (controller.productMark.isEmpty) {
+            return Center(
+              child: Text(
+                "Belum ada data favorite",
+                style: TextStyle(
+                  color: AppColor.primaryblue,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
           }
           return RefreshIndicator(
+            onRefresh: () async {
+              controller.fetchMarkProduct();
+            },
             child: ListView.builder(
+              itemCount: controller.productMark.length,
               itemBuilder: (context, index) {
                 final product = controller.productMark[index];
+
                 return Container(
                   decoration: BoxDecoration(
                     color: AppColor.neutrallight,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: AppColor.primaryblue),
                   ),
-                  margin: EdgeInsets.only(bottom: 10, top: 10),
+                  margin: const EdgeInsets.symmetric(vertical: 10),
                   child: ListTile(
                     leading: Image.network(
-                      product.image.toString(),
+                      product.image,
                       height: 50,
                       width: 50,
+                      fit: BoxFit.cover,
                     ),
                     title: Text(product.title),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(product.price.toString()),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(product.category.toString()),
                       ],
                     ),
                     trailing: IconButton(
                       onPressed: () {
-                        controller.markFavoriteProduct(index);
+                        controller.deleteMarkProduct(index);
                       },
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                     ),
                   ),
                 );
               },
-              itemCount: controller.productResponse.length,
             ),
-            onRefresh: () async {
-              controller.fetchProduct();
-            },
           );
         }),
       ),
