@@ -14,7 +14,7 @@ class SplashPages extends StatelessWidget {
           style: TextStyle(
             color: Colors.blueAccent,
             fontWeight: FontWeight.bold,
-            fontSize: 15,
+            fontSize: 20,
           ),
         ),
       ),

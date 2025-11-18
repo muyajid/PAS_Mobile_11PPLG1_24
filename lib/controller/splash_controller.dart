@@ -10,7 +10,7 @@ class SplashController extends GetxController {
   }
 
   void checkLogin() async {
-    Future.delayed(Duration(seconds: 5));
+    Future.delayed(Duration(seconds: 10));
     final pref = await SharedPreferences.getInstance();
 
     final token = pref.getString("token");

@@ -16,15 +16,20 @@ class DBHelper {
 
   Future<Database> _initDb() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'todo.db');
+    final path = join(dbPath, 'product.db');
 
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute(
-          'CREATE TABLE product(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, category TEXT)',
-        );
+        await db.execute('''
+          CREATE TABLE product(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            image TEXT,
+            title TEXT,
+            category TEXT
+          )
+          ''');
       },
     );
   }
@@ -41,6 +46,6 @@ class DBHelper {
 
   Future<List<Map<String, dynamic>>> getMarkProduct() async {
     final client = await db;
-    return client.query('product');
+    return await client.query('product');
   }
 }
